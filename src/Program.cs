@@ -17,22 +17,38 @@
     }
     public static void Main()
     {
+        Console.WriteLine($"Tempreture 32 F converted:  {TempConvert(32, "F")}");
+        Console.WriteLine($"Tempreture 100 C converted:  {TempConvert(100, "C")}\n");
 
-        Console.WriteLine(TempConvert(32, "F"));
-        Console.WriteLine(TempConvert(100, "C"));
+        try
+        {
+            while (true)
+            {
 
-        Console.WriteLine("--------------Tempretures Converted-------------");
+                Console.WriteLine("-----------------Tempretures Converted----------------");
 
-        Console.Write("Enter a temperature and its unit (C or F): ");
-        string temperature = Console.ReadLine() ?? "";
+                Console.Write("Enter a temperature and its unit (C or F), or type 'Quit' to exit: ");
+                string field = Console.ReadLine() ?? "";
 
-        string[] temperatureArray = temperature.Split(" ");
-        double tempValue = Convert.ToDouble(temperatureArray[0]);
-        string tempUnit = temperatureArray[1].ToUpper();
+                if (field.ToLower().Equals("quit"))
+                {
+                    Console.WriteLine("Program terminated.");
+                    break;
+                }
 
-        string convertedTempreture = TempConvert(tempValue, tempUnit);
+                string[] temperature = field.Split(" ");
+                double tempValue = Convert.ToDouble(temperature[0]);
+                string tempUnit = temperature[1].ToUpper();
 
-        Console.WriteLine($"Converted: {tempValue} {tempUnit} = {convertedTempreture}");
+                string convertedTempreture = TempConvert(tempValue, tempUnit);
 
+                Console.WriteLine($"Converted: {tempValue} {tempUnit} = {convertedTempreture}");
+
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
     }
 }
