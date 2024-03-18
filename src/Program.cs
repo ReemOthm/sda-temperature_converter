@@ -37,8 +37,21 @@
                 }
 
                 string[] temperature = field.Split(" ");
-                double tempValue = Convert.ToDouble(temperature[0]);
+                if(temperature.Length != 2){
+                    Console.WriteLine("Invalid Inputs. Please Enter Tempreture value and its unit (F or C), ex. '20 F'");
+                    continue;
+                }
+
+                if(!double.TryParse(temperature[0], out double tempValue)){
+                    Console.WriteLine("Invalid input. Please enter a numeric temperature.");
+                    continue;
+                }
+
                 string tempUnit = temperature[1].ToUpper();
+                if(!tempUnit.Equals("C") && !tempUnit.Equals("F")){
+                    Console.WriteLine("Invalid scale. Please enter 'C' for Celsius or 'F' for Fahrenheit.");
+                    continue;
+                }
 
                 string convertedTempreture = TempConvert(tempValue, tempUnit);
 
